@@ -1,0 +1,847 @@
+
+package classificationcrime;
+
+import Algo.Kmeansclustering;
+import Algo.fuzzycmeansactual;
+import Database.DatabaseConnection;
+import com.machine.learning.decisiontrees.DecisionTree;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.UIManager;
+import javax.swing.table.DefaultTableModel;
+import org.jfree.ui.RefineryUtilities;
+
+/**
+ *
+ * @author Shuchita
+ */
+public class MianFrame extends javax.swing.JFrame {
+Connection con;
+              
+             
+    /**
+     * Creates new form MianFrame
+     */
+    public MianFrame() throws SQLException {
+        initComponents();
+        setExtendedState(this.getExtendedState() | JFrame.MAXIMIZED_BOTH);
+          DatabaseConnection db = new DatabaseConnection();
+        
+        con= db.dbconnection();
+         
+          String sql1r="select distinct(Block) as block  from crimedata";
+         
+         PreparedStatement ps11r;
+         
+         
+          ResultSet rs1r= db.getResultSet(sql1r);
+         
+          int count=0;
+         // List<String> strings = new ArrayList<String>();
+         while(rs1r.next()) {
+               
+             String block=rs1r.getString("block");
+               jComboBox1.addItem(block);
+            // strings.add(block);
+                 
+           }
+         
+         
+          String sql1r1="select distinct(IUCR) as block  from crimedata";
+         
+         PreparedStatement ps11r1;
+         
+         
+          ResultSet rs1r1= db.getResultSet(sql1r1);
+         
+         
+         // List<String> strings = new ArrayList<String>();
+         while(rs1r1.next()) {
+               
+             String block=rs1r1.getString("block");
+               jComboBox2.addItem(block);
+            // strings.add(block);
+                 
+           }
+         
+         
+         
+          String sql1r2="select distinct(PrimaryType) as block  from crimedata";
+         
+         PreparedStatement ps11r2;
+         
+         
+          ResultSet rs1r2= db.getResultSet(sql1r2);
+         
+         
+         // List<String> strings = new ArrayList<String>();
+         while(rs1r2.next()) {
+               
+             String block=rs1r2.getString("block");
+               jComboBox3.addItem(block);
+            // strings.add(block);
+                 
+           }
+         
+         
+          String sql1r3="select distinct(LocationDescription) as block  from crimedata";
+         
+         PreparedStatement ps11r3;
+         
+         
+          ResultSet rs1r3= db.getResultSet(sql1r3);
+         
+         
+         // List<String> strings = new ArrayList<String>();
+         while(rs1r3.next()) {
+               
+             String block=rs1r3.getString("block");
+               jComboBox4.addItem(block);
+            // strings.add(block);
+                 
+           }
+         
+          String sql1r4="select distinct(District) as block  from crimedata";
+         
+         PreparedStatement ps11r4;
+         
+         
+          ResultSet rs1r4= db.getResultSet(sql1r4);
+         
+       
+         // List<String> strings = new ArrayList<String>();
+         while(rs1r4.next()) {
+               
+             String block=rs1r4.getString("block");
+               jComboBox5.addItem(block);
+            // strings.add(block);
+                 
+           }
+         
+         
+          String sql1r5="select distinct(Latitude) as block  from crimedata";
+         
+         PreparedStatement ps11r5;
+         
+         
+          ResultSet rs1r5= db.getResultSet(sql1r5);
+         
+         
+         // List<String> strings = new ArrayList<String>();
+         while(rs1r5.next()) {
+               
+             String block=rs1r5.getString("block");
+               jComboBox6.addItem(block);
+            // strings.add(block);
+                 
+           }
+         
+          String sql1r6="select distinct(Longitude) as block  from crimedata";
+         
+         PreparedStatement ps11r6;
+         
+         
+          ResultSet rs1r6= db.getResultSet(sql1r6);
+         
+         
+         // List<String> strings = new ArrayList<String>();
+         while(rs1r6.next()) {
+               
+             String block=rs1r6.getString("block");
+               jComboBox7.addItem(block);
+            // strings.add(block);
+                 
+           }
+      
+       // jComboBox1.addItem(strings);
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox();
+        jLabel2 = new javax.swing.JLabel();
+        jComboBox2 = new javax.swing.JComboBox();
+        jLabel3 = new javax.swing.JLabel();
+        jComboBox3 = new javax.swing.JComboBox();
+        jLabel4 = new javax.swing.JLabel();
+        jComboBox4 = new javax.swing.JComboBox();
+        jLabel5 = new javax.swing.JLabel();
+        jComboBox5 = new javax.swing.JComboBox();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jComboBox6 = new javax.swing.JComboBox();
+        jComboBox7 = new javax.swing.JComboBox();
+        jButton3 = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jButton5 = new javax.swing.JButton();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        jButton1.setText("Display Data");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Clusters");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Block");
+
+        jLabel2.setText("IUCR");
+
+        jLabel3.setText("Crime Type");
+
+        jComboBox3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox3ActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("location description");
+
+        jLabel5.setText("District");
+
+        jLabel6.setText("Lattitude");
+
+        jLabel7.setText("Longitude");
+
+        jButton3.setText("Fuzzy c means");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setText("Fuzzy C means");
+
+        jButton4.setText("K means Clustering");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setText("K means Clustering");
+
+        jLabel10.setText("jLabel10");
+
+        jLabel11.setText("jLabel11");
+
+        jLabel12.setText("Time Required");
+
+        jLabel13.setText("jLabel13");
+
+        jLabel14.setText("jLabel14");
+
+        jButton5.setText("Display Graph");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addGap(45, 45, 45)
+                        .addComponent(jButton2)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 817, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(44, 44, 44)
+                                .addComponent(jButton3)
+                                .addGap(149, 149, 149)
+                                .addComponent(jButton4)
+                                .addContainerGap())
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel12)
+                                .addGap(118, 118, 118))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel10)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel9)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(jLabel11)))
+                                        .addGap(173, 173, 173)
+                                        .addComponent(jLabel14)
+                                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(75, 75, 75)
+                                        .addComponent(jLabel13)
+                                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(196, 196, 196)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel1)
+                                            .addComponent(jLabel2)
+                                            .addComponent(jLabel3))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(jButton5)
+                                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(48, 48, 48)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addContainerGap(164, Short.MAX_VALUE))))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel4)
+                                            .addComponent(jLabel5)
+                                            .addComponent(jLabel6)
+                                            .addComponent(jLabel7))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jComboBox7, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(0, 0, Short.MAX_VALUE))))))))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton1)
+                            .addComponent(jButton2)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButton5)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(26, 26, 26)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(34, 34, 34)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(27, 27, 27)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(47, 47, 47))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel5)))
+                        .addGap(34, 34, 34)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6))
+                        .addGap(40, 40, 40)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jComboBox7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton4)
+                            .addComponent(jButton3))
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel12)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel13))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel14))
+                        .addGap(77, 77, 77))))
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+        
+        
+        BufferedReader enBr = null;
+        try {
+            // TODO add your handling code here:
+            
+           String arraysplit[]="ID,Case Number,Date,Block,IUCR,Primary Type,Description,Location Description,Arrest,Domestic,Beat,District,Ward,Community Area,FBI Code,X Coordinate,Y Coordinate,Year,Updated On,Latitude,Longitude,Location".split(",");  
+            
+            DefaultTableModel model = new DefaultTableModel();
+            for (int i = 0; i < arraysplit.length; i++) {
+                model.addColumn(arraysplit[i]);
+            }
+            String line;
+            int id=0;
+            String english = Constants.path+"/process.csv";// "./dataset/41.txt";
+         
+            enBr = new BufferedReader(new FileReader(english));
+            
+            ArrayList<String> dataobtained = new ArrayList<String>();
+            while ((line = enBr.readLine()) != null) {
+                dataobtained.add(line);
+            }   for (String temp : dataobtained) {
+                id++;
+//			System.out.println(temp);
+                
+                String[] values = temp.split(",", -1);
+                
+                
+                model.addRow(new Object[]{id,
+                    values[0], values[1],values[2], values[3],values[4], values[5],values[6], values[7],values[8], values[9],values[10]
+                , values[11],values[12], values[13],values[14], values[15],values[16], values[17],values[18], values[19],values[20]});
+                
+            }
+            jTable1.setModel(model);
+            jTable1.setAutoResizeMode(jTable1.AUTO_RESIZE_OFF);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(MianFrame.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(MianFrame.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                enBr.close();
+            } catch (IOException ex) {
+                Logger.getLogger(MianFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+         new EKmeansGUI();
+//        new DisplayCLusterFrames().setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+       long starttime=System.currentTimeMillis();
+        
+        
+        try {
+            // TODO add your handling code here:
+            String suspectedoutput="";
+            String Block=jComboBox1.getSelectedItem().toString();
+            String IUCR=jComboBox2.getSelectedItem().toString();
+            String crimetype=jComboBox3.getSelectedItem().toString();
+            String description=jComboBox4.getSelectedItem().toString();
+            String district=jComboBox5.getSelectedItem().toString();
+            String lattitude=jComboBox6.getSelectedItem().toString();
+            String longitude=jComboBox7.getSelectedItem().toString();
+            
+            
+            
+            fuzzycmeansactual.main1();
+            
+            DatabaseConnection db = new DatabaseConnection();
+            
+            db.dbconnection();
+            
+            String sql1r="select *  from crimedata where PrimaryType='"+crimetype+"'";
+            
+            PreparedStatement ps11r;
+            
+            
+            ResultSet rs1r= db.getResultSet(sql1r);
+            
+            int count=0;
+            // List<String> strings = new ArrayList<String>();
+            while(rs1r.next()) {
+                
+              //  String Latitude=rs1r.getString("Latitude");
+               
+                
+                
+                
+                 String sql1r1="select *  from crimedata where Latitude='"+lattitude+"'";
+            
+            PreparedStatement ps11r1;
+            
+            
+            ResultSet rs1r1= db.getResultSet(sql1r1);
+            
+            int count1=0;
+            // List<String> strings = new ArrayList<String>();
+            while(rs1r1.next()) {
+                
+              //  String Longitude=rs1r.getString("Longitude");
+               
+                
+                
+                 String sql1r12="select *  from crimedata where Longitude='"+longitude+"'";
+            
+            PreparedStatement ps11r12;
+            
+            
+            ResultSet rs1r12= db.getResultSet(sql1r12);
+            
+            int count12=0;
+            // List<String> strings = new ArrayList<String>();
+            while(rs1r12.next()) {
+                
+               // String Longitude=rs1r.getString("Longitude");
+               
+                
+                 String sql1r121="select *  from crimedata where District='"+district+"'";
+            
+            PreparedStatement ps11r121;
+            
+            
+            ResultSet rs1r121= db.getResultSet(sql1r121);
+            
+            int count121=0;
+            // List<String> strings = new ArrayList<String>();
+            while(rs1r121.next()) {
+                
+                
+                
+                 String sql1r1215="select *  from crimedata where LocationDescription='"+description+"'";
+            
+            PreparedStatement ps11r1215;
+            
+            
+            ResultSet rs1r1215= db.getResultSet(sql1r1215);
+            
+            int count1215=0;
+            // List<String> strings = new ArrayList<String>();
+            while(rs1r1215.next()) {
+                
+                
+                
+                String sql1r12154="select *  from crimedata where Block='"+Block+"'";
+            
+            PreparedStatement ps11r12154;
+            
+            
+            ResultSet rs1r12154= db.getResultSet(sql1r12154);
+            
+            int count12154=0;
+            // List<String> strings = new ArrayList<String>();
+            while(rs1r12154.next()) {
+                
+                
+                
+                suspectedoutput=rs1r12154.getString("ID");
+                
+                
+                
+                
+               
+                
+            }
+                
+                
+                
+                
+               
+                
+            }
+                
+                
+                
+                
+               
+                
+            }
+                
+                
+                
+                
+                
+               
+                
+            }
+            
+                
+                
+                
+                
+               
+                
+            }
+            
+                
+                
+                
+               
+                
+            }
+              long stoptime=System.currentTimeMillis();
+              
+              long elapsedtime=stoptime-starttime;
+              
+              jLabel13.setText(""+elapsedtime);
+            jLabel10.setText(suspectedoutput);
+            
+            
+              
+             String query1q="insert into graphtable(time,type) values(?,?)";
+    
+                       PreparedStatement psmt1q;
+                       InputStream is = null;
+                                       try {
+                                               psmt1q = con.prepareStatement(query1q);
+                                                psmt1q.setString(1,elapsedtime+"");
+                                                psmt1q.setString(2,"N");
+                                               
+                                               
+                                     
+                                       
+                                                
+                                          int i1 = psmt1q.executeUpdate();
+                                       } catch (SQLException e) {
+                                               // TODO Auto-generated catch block
+                                               e.printStackTrace();
+                                       }
+            
+            
+            
+            
+            String wholedataadd=Block+"|"+IUCR+"|"+crimetype+"|"+description+"|"+district+"|"+lattitude+"|"+longitude;
+            
+            System.out.println(wholedataadd);
+        } catch (SQLException ex) {
+            Logger.getLogger(MianFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        long starttime=System.currentTimeMillis();
+         String Block=jComboBox1.getSelectedItem().toString();
+        String IUCR=jComboBox2.getSelectedItem().toString();
+        String crimetype=jComboBox3.getSelectedItem().toString();
+        String description=jComboBox4.getSelectedItem().toString();
+        String district=jComboBox5.getSelectedItem().toString();
+        String lattitude=jComboBox6.getSelectedItem().toString();
+        String longitude=jComboBox7.getSelectedItem().toString();
+            
+           
+        String wholedataadd=Block+"|"+IUCR+"|"+crimetype+"|"+description+"|"+district+"|"+lattitude+"|"+longitude;
+        
+        
+    try {
+        Kmeansclustering.main1();
+    } catch (SQLException ex) {
+        Logger.getLogger(MianFrame.class.getName()).log(Level.SEVERE, null, ex);
+    }
+        
+		DecisionTree tree = new DecisionTree();
+		
+		// Train your Decision Tree
+		tree.train(new File("C:\\final year project\\13032018 code\\ClassificationCrime\\src\\booksreview.csv"));
+		
+		// Print RootNode display xml structure from your decision tree learning
+		System.out.println(tree.getRootNode());
+
+		// Classify your new data
+//		System.out.println(tree
+//				.classify("a|girl,class,only,guy|First class|low|no"));//Mk|M|low|Service|House-wife|First class|low|yes
+
+                
+                String outputofdata=tree
+				.classify(wholedataadd);
+                
+		System.out.println(outputofdata);
+	long stoptime=System.currentTimeMillis();
+              
+              long elapsedtime=stoptime-starttime;
+              
+              jLabel14.setText(""+elapsedtime);
+        jLabel11.setText(outputofdata);
+         String query1q="insert into graphtable(time,type) values(?,?)";
+    
+                       PreparedStatement psmt1q;
+                       InputStream is = null;
+                                       try {
+                                               psmt1q = con.prepareStatement(query1q);
+                                                psmt1q.setString(1,elapsedtime+"");
+                                                psmt1q.setString(2,"I");
+                                               
+                                               
+                                     
+                                       
+                                                
+                                          int i1 = psmt1q.executeUpdate();
+                                       } catch (SQLException e) {
+                                               // TODO Auto-generated catch block
+                                               e.printStackTrace();
+                                       }
+            
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        
+        final LineChartDemo6 demo = new LineChartDemo6("Line Chart Demo 6");
+        demo.pack();
+        RefineryUtilities.centerFrameOnScreen(demo);
+        demo.setVisible(true);
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(MianFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(MianFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(MianFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(MianFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+               
+                
+                 try {
+//                UIManager.setLookAndFeel("com.jtattoo.plaf.acryl.AcrylLookAndFeel");
+//                UIManager.setLookAndFeel("com.jtattoo.plaf.aluminium.AluminiumLookAndFeel");
+//                UIManager.setLookAndFeel("com.jtattoo.plaf.fast.FastLookAndFeel");
+//                UIManager.setLookAndFeel("com.jtattoo.plaf.mint.MintLookAndFeel");
+                UIManager.setLookAndFeel("com.jtattoo.plaf.hifi.HiFiLookAndFeel");
+                    new MianFrame().setVisible(true);
+                } catch (Exception ex) {
+                    Logger.getLogger(MianFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JComboBox jComboBox2;
+    private javax.swing.JComboBox jComboBox3;
+    private javax.swing.JComboBox jComboBox4;
+    private javax.swing.JComboBox jComboBox5;
+    private javax.swing.JComboBox jComboBox6;
+    private javax.swing.JComboBox jComboBox7;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
+    // End of variables declaration//GEN-END:variables
+}
